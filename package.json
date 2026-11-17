@@ -1,0 +1,15 @@
+{
+  "name": "jumtoo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Jumtoo en SaaS : CRM, facturation, stock et comptabilité pour les entreprises, une adresse par entreprise.",
+  "type": "module",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node --no-warnings=ExperimentalWarning src/server.js",
+    "dev": "JUMTOO_ENV=development node --no-warnings=ExperimentalWarning --watch src/server.js",
+    "test": "node --no-warnings=ExperimentalWarning --test test/*.test.js",
+    "admin:create": "node --no-warnings=ExperimentalWarning src/cli.js create-platform-admin",
+    "backup": "node --no-warnings=ExperimentalWarning src/cli.js backup"
+  }
+}

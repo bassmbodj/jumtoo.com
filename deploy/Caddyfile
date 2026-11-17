@@ -1,0 +1,12 @@
+# Remplacez jumtoo.com si vous prenez un autre domaine.
+jumtoo.com {
+	redir https://www.jumtoo.com{uri} permanent
+}
+
+www.jumtoo.com {
+	encode zstd gzip
+	request_body {
+		max_size 12MB
+	}
+	reverse_proxy jumtoo:3000
+}

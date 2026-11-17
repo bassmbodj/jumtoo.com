@@ -1,0 +1,30 @@
+# Production : Jumtoo derrière Caddy (HTTPS automatique Let's Encrypt).
+services:
+  jumtoo:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATA_DIR: /data
+      TRUST_PROXY: "1"
+    volumes:
+      - jumtoo-data:/data
+    expose:
+      - "3000"
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - jumtoo
+volumes:
+  jumtoo-data:
+  caddy-data:
+  caddy-config:
